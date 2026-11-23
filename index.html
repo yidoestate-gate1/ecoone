@@ -1131,6 +1131,7 @@ a{color:#5be3b0}a:hover{color:#9ff0cf}
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #a9b6c4"><span>연락처 <span style="color: #ff8a80">*</span></span><input type="tel" inputmode="numeric" maxlength="13" value="{{fm.phone}}" onChange="{{fm.setPhone}}" placeholder="010-0000-0000" class="fi"></label>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #a9b6c4">이메일<input type="email" value="{{fm.email}}" onChange="{{fm.setEmail}}" placeholder="name@company.com" class="fi"></label>
 </div>
+<div aria-hidden="true" style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden"><label>웹사이트(입력하지 마세요)<input type="text" name="hp_extra_note" tabindex="-1" autocomplete="off" onChange="{{fm.setHp}}"></label></div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <p style="margin: 0; font-size: 13px; font-weight: 700; color: #a9b6c4">현장 유형</p>
 <div role="group" aria-label="현장 유형" style="display: flex; flex-wrap: wrap; gap: 8px">
@@ -1163,8 +1164,8 @@ a{color:#5be3b0}a:hover{color:#9ff0cf}
 <sc-if value="{{fm.useEndpoint}}" hint-placeholder-val="{{ true }}">
 <button type="button" onClick="{{fm.send}}" disabled="{{fm.sending}}" style="width: 100%; font: inherit; font-size: 17px; font-weight: 800; color: #0b0f17; background: #5be3b0; border: 0; border-radius: 12px; padding: 16px; min-height: 54px; cursor: pointer">{{fm.sendLabel}}</button>
 <sc-if value="{{fm.hasSendErr}}" hint-placeholder-val="{{ false }}">
-<a href="{{fm.submitUrl}}" target="_blank" rel="noopener" onClick="{{fm.sent}}" style="display: block; text-align: center; text-decoration: none; font-size: 15px; font-weight: 800; color: #0b0f17; background: #ffd166; border-radius: 12px; padding: 13px; min-height: 48px; box-sizing: border-box">한 번 더 눌러 접수 완료 (새 창)</a>
-<p style="margin: 0; font-size: 13px; color: #a9b6c4">이 화면에서는 바로 전송이 막혀 있어 새 창으로 접수합니다. 문제가 있으면 010-5513-5148로 연락 주세요.</p>
+<p role="alert" style="margin: 0; font-size: 14px; font-weight: 700; color: #ffd166">{{fm.sendErrMsg}}</p>
+<a href="{{fm.mailto}}" style="display: block; text-align: center; text-decoration: none; font-size: 15px; font-weight: 800; color: #0b0f17; background: #ffd166; border-radius: 12px; padding: 13px; min-height: 48px; box-sizing: border-box">메일로 직접 보내기 (gate1@yido.com)</a>
 </sc-if>
 </sc-if>
 <sc-if value="{{fm.noEndpoint}}" hint-placeholder-val="{{ false }}">
@@ -1291,6 +1292,7 @@ const subj = '[EcoOne 도입문의] ' + F.company + ' / ' + F.name;
 const TO = 'gate1@yido.com';
 const EP = (this.props.endpoint || 'https://script.google.com/macros/s/AKfycbzGD450QxyuoY51SLFpG_yYE_NMx692Xh-UCJd40AExTuP-4Bgq20PCBDGG_e4lj9Q/exec').trim();
 const hasEP = /^https:\/\/script\.google\.com\/macros\/s\/[^\s]+\/exec$/.test(EP);
+const CONSENT_VER = '2026-11-23';
 out.formOpen = st.form !== null;
 out.formEdit = st.form === 'edit';
 out.formReview = st.form === 'review';
@@ -1326,22 +1328,22 @@ siteVal: F.site, featsVal: F.feats.join(', '),
 send: () => {
 if (this.state.sending) return;
 const f = this.state.fm;
-const body = new URLSearchParams({ company: f.company, name: f.name, phone: f.phone, email: f.email, site: f.site, feats: f.feats.join(', '), msg: (f.msg || '').slice(0, 2000), t: String(Date.now() - (this.state.formAt || 0)) });
-this.setState({ sending: true, sendErr: false });
-const done = () => this.setState({ sending: false, form: 'done' });
-const fail = () => this.setState({ sending: false, sendErr: true });
+const body = new URLSearchParams({ company: f.company, name: f.name, phone: f.phone, email: f.email, site: f.site, feats: f.feats.join(', '), msg: (f.msg || '').slice(0, 2000), consent: f.agree ? 'Y' : 'N', cver: CONSENT_VER, website: this.state.hp || '', t: String(Date.now() - (this.state.formAt || 0)) });
+this.setState({ sending: true, sendErr: false, sendErrMsg: '' });
+const fail = (m) => this.setState({ sending: false, sendErr: true, sendErrMsg: m || '접수 서버에 연결하지 못했습니다. 아래 버튼으로 메일을 보내 주세요.' });
 try {
 const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-const to = setTimeout(() => { if (ctl) ctl.abort(); }, 15000);
-fetch(EP, { method: 'POST', mode: 'no-cors', credentials: 'omit', body: body, signal: ctl ? ctl.signal : undefined })
-.then(() => { clearTimeout(to); done(); })
+const to = setTimeout(() => { if (ctl) ctl.abort(); }, 20000);
+fetch(EP, { method: 'POST', mode: 'cors', credentials: 'omit', redirect: 'follow', body: body, signal: ctl ? ctl.signal : undefined })
+.then(r => r.json())
+.then(j => { clearTimeout(to); if (j && j.ok && j.id) this.setState({ sending: false, form: 'done', receipt: String(j.id) }); else fail(j && j.msg); })
 .catch(() => { clearTimeout(to); fail(); });
 } catch (e) { fail(); }
 },
 sending: !!st.sending, sendLabel: st.sending ? '접수 중…' : '접수하기', hasSendErr: !!st.sendErr,
-submitUrl: hasEP ? EP + '?' + [['company', F.company], ['name', F.name], ['phone', F.phone], ['email', F.email], ['site', F.site], ['feats', F.feats.join(', ')], ['msg', (F.msg || '').slice(0, 600)], ['t', String(Date.now() - (st.formAt || 0))]].map(kv => kv[0] + '=' + encodeURIComponent(kv[1] || '')).join('&') : '',
+sendErrMsg: st.sendErrMsg || '', setHp: (e) => this.setState({ hp: String(e && e.target ? e.target.value : e || '') }),
 doneTitle: hasEP ? '접수되었습니다' : '메일 창이 열렸습니다',
-doneMsg: hasEP ? '담당자가 확인 후 연락드리겠습니다. 이메일을 남기셨다면 접수 확인 메일이 발송됩니다.' : '열린 메일에서 보내기를 누르면 접수가 끝납니다.',
+doneMsg: hasEP ? '접수번호 ' + (st.receipt || '-') + ' · 담당자가 확인 후 연락드리겠습니다. 이메일을 남기셨다면 접수 확인 메일이 발송됩니다.' : '열린 메일에서 보내기를 누르면 접수가 끝납니다.',
 mailto: 'mailto:' + TO + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body),
 gmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(TO) + '&su=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body)
 };
