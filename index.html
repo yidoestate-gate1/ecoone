@@ -317,10 +317,11 @@ try { window.__dcHostRuntime = true; } catch (e) {}
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@700;800&amp;display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 body{margin:0;background:#0b0f17}
 a{color:#5be3b0}a:hover{color:#9ff0cf}
-.mono{font-family:'JetBrains Mono',monospace}
+.mono{font-family:'Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif;font-variant-numeric:tabular-nums}
 /* cctv */
 .cam-img{position:absolute;left:-6%;top:-6%;width:112%;height:112%;max-width:none;object-fit:cover;filter:saturate(.72) contrast(1.12) brightness(.86);animation:campan 14s ease-in-out infinite alternate}
 @keyframes campan{0%{transform:scale(1) translate(0,0)}50%{transform:scale(1.07) translate(-2%,1%)}100%{transform:scale(1.03) translate(2%,-1%)}}
@@ -422,11 +423,11 @@ a{color:#5be3b0}a:hover{color:#9ff0cf}
 .pkt{display:none;position:absolute;width:16px;height:16px;margin:-8px;border-radius:50%;background:#5be3b0;border:3px solid #fff;box-shadow:0 0 0 6px rgba(91,227,176,.35),0 0 18px #2ecc8f;transition:left .8s cubic-bezier(.6,0,.2,1),top .8s cubic-bezier(.6,0,.2,1);z-index:2}
 .flowline.hflow{stroke-width:4;stroke-dasharray:3 10;opacity:1;stroke:#159456}
 .hhalo{fill:none;stroke:rgba(255,255,255,.85);stroke-width:12;stroke-linecap:round;vector-effect:non-scaling-stroke}
-.hnode circle{fill:#ffffff;stroke:#1f9d63;stroke-width:3.5}.hnode text{fill:#1f9d63;font-size:17px;font-weight:900;font-family:'JetBrains Mono',monospace}
+.hnode circle{fill:#ffffff;stroke:#1f9d63;stroke-width:3.5}.hnode text{fill:#1f9d63;font-size:17px;font-weight:900;font-family:'Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif;font-variant-numeric:tabular-nums}
 .hfa{fill:#1f9d63;stroke:#ffffff;stroke-width:1.5;paint-order:stroke}
 .hseg{display:none}.seg1 .hs1,.seg2 .hs2,.seg3 .hs3,.seg4 .hs4,.seg5 .hs5{display:inline}
 .seg1 .hn1 circle,.seg2 .hn2 circle,.seg3 .hn3 circle,.seg4 .hn4 circle,.seg5 .hn5 circle{fill:#1f9d63;stroke:#fff}.seg1 .hn1 text,.seg2 .hn2 text,.seg3 .hn3 text,.seg4 .hn4 text,.seg5 .hn5 text{fill:#fff}
-.hstart circle{fill:#1f9d63;stroke:#fff;stroke-width:3}.hstart rect{fill:#173f2c}.hstart text{fill:#fff;font-size:17px;font-weight:900;font-family:'Noto Sans KR',sans-serif}
+.hstart circle{fill:#1f9d63;stroke:#fff;stroke-width:3}.hstart rect{fill:#173f2c}.hstart text{fill:#fff;font-size:17px;font-weight:900;font-family:'Pretendard Variable', Pretendard, 'Noto Sans KR',sans-serif}
 .flowline{fill:none;stroke:#1f9d63;stroke-width:2;stroke-dasharray:1 7;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.9;animation:flow 1s linear infinite}
 /* ledger */
 @keyframes rowin{from{opacity:0;transform:translateY(-6px);background:#c9f0dc}to{background:transparent}}
@@ -463,7 +464,7 @@ a{color:#5be3b0}a:hover{color:#9ff0cf}
 .pk-hot{animation:hotp 2.2s ease-in-out infinite}
 /* hero labels */
 .hlab{position:absolute;display:flex;align-items:center;justify-content:center;gap:.45em;padding:0 .75em;box-sizing:border-box;border-radius:.45em;background:#f6fbf7;color:#173f2c;font-weight:900;font-size:2.55cqw;letter-spacing:-.02em;white-space:nowrap;line-height:1;transition:background .3s,color .3s}
-.hlab b{font-family:'JetBrains Mono',monospace;font-size:.72em;font-weight:800;color:#1f9d63;padding:.12em .3em;border-radius:.25em;background:#e2f5eb}
+.hlab b{font-family:'Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif;font-variant-numeric:tabular-nums;font-size:.72em;font-weight:800;color:#1f9d63;padding:.12em .3em;border-radius:.25em;background:#e2f5eb}
 .hlab.on{animation:hlinv .9s steps(1) infinite;box-shadow:0 .2em .8em rgba(31,157,99,.35)}
 .hlab.on b{background:transparent}
 @keyframes hlinv{0%{background:#1f9d63;color:#ffffff}50%{background:#f6fbf7;color:#173f2c}}
@@ -527,7 +528,7 @@ a{color:#5be3b0}a:hover{color:#9ff0cf}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </helmet>
-<div class="wrap" style="font-family: 'Noto Sans KR', system-ui, sans-serif; color: #e8ecf3; background: #0b0f17; line-height: 1.5; overflow-x: hidden">
+<div class="wrap" style="font-family: 'Pretendard Variable', Pretendard, 'Noto Sans KR', system-ui, sans-serif; color: #e8ecf3; background: #0b0f17; line-height: 1.5; overflow-x: hidden">
 
 <header style="position: sticky; top: 0; z-index: 20; background: rgba(11, 15, 23, 0.88); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.07)">
 <div style="max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
@@ -776,9 +777,9 @@ a{color:#5be3b0}a:hover{color:#9ff0cf}
 <div style="display: flex; gap: 4px; padding: 0 4px"><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb">0</span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb">3</span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb">6</span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb">9</span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb">12</span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb">15</span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb">18</span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb">21</span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span><span style="flex: 1 1 0; text-align: center; font-size: 12px; color: #8fa0bb"></span></div>
 </div>
 <div class="rv" style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
-<div style="flex: 1; padding: 16px 20px; border-radius: 14px; background: #11322a"><p class="mono" style="margin: 0; font-size: 34px; font-weight: 800; color: #5be3b0"><span class="cu" style="--n: 891"></span>건 <span style="font-family: 'Noto Sans KR'; font-size: 26px">전량 무인</span></p><p style="margin: 0; font-size: 14px; color: #cfd8e8">계근 담당자 없이 시스템이 기록</p></div>
+<div style="flex: 1; padding: 16px 20px; border-radius: 14px; background: #11322a"><p class="mono" style="margin: 0; font-size: 34px; font-weight: 800; color: #5be3b0"><span class="cu" style="--n: 891"></span>건 <span style="font-family: 'Pretendard Variable', Pretendard, 'Noto Sans KR'; font-size: 26px">전량 무인</span></p><p style="margin: 0; font-size: 14px; color: #cfd8e8">계근 담당자 없이 시스템이 기록</p></div>
 <div class="pk-hot" style="flex: 1; padding: 16px 20px; border-radius: 14px; background: #e0661f"><p class="mono" style="margin: 0; font-size: 34px; font-weight: 800; color: #ffffff"><span class="cu" style="--n: 405"></span>건 · <span class="cu" style="--n: 45"></span>%</p><p style="margin: 0; font-size: 14px; color: #ffffff">근무시간 외 계근 (야간·주말·공휴일)</p></div>
-<div style="flex: 1; padding: 16px 20px; border-radius: 14px; background: #11322a"><p class="mono" style="margin: 0; font-size: 34px; font-weight: 800; color: #5be3b0"><span class="cu" style="--n: 6"></span>.<span class="cu" style="--n: 9"></span><span style="font-family: 'Noto Sans KR'; font-size: 26px">억원</span></p><p style="margin: 0; font-size: 14px; color: #cfd8e8">근무시간 외 출고 판매액</p></div>
+<div style="flex: 1; padding: 16px 20px; border-radius: 14px; background: #11322a"><p class="mono" style="margin: 0; font-size: 34px; font-weight: 800; color: #5be3b0"><span class="cu" style="--n: 6"></span>.<span class="cu" style="--n: 9"></span><span style="font-family: 'Pretendard Variable', Pretendard, 'Noto Sans KR'; font-size: 26px">억원</span></p><p style="margin: 0; font-size: 14px; color: #cfd8e8">근무시간 외 출고 판매액</p></div>
 <div style="flex: 1; padding: 16px 20px; border-radius: 14px; background: #1a7a52"><p class="mono" style="margin: 0; font-size: 34px; font-weight: 800; color: #ffffff"><span class="cu" style="--n: 9"></span>곳 · <span class="cu" style="--n: 270"></span>대</p><p style="margin: 0; font-size: 14px; color: #e8ecf3">전국 사업장 본사 통합관제 중</p></div>
 </div>
 </div>
@@ -1158,7 +1159,7 @@ a{color:#5be3b0}a:hover{color:#9ff0cf}
 <sc-if value="{{formReview}}" hint-placeholder-val="{{ false }}">
 <div style="padding: 22px 26px 26px; display: flex; flex-direction: column; gap: 16px">
 <p style="margin: 0; font-size: 15px; color: #cfd8e8">아래 내용으로 도입 상담을 접수합니다.</p>
-<pre style="margin: 0; padding: 16px; border-radius: 12px; background: #0b0f17; border: 1px solid #222c38; font-family: 'Noto Sans KR', sans-serif; font-size: 14px; line-height: 1.7; color: #e8ecf3; white-space: pre-wrap">{{fm.preview}}</pre>
+<pre style="margin: 0; padding: 16px; border-radius: 12px; background: #0b0f17; border: 1px solid #222c38; font-family: 'Pretendard Variable', Pretendard, 'Noto Sans KR', sans-serif; font-size: 14px; line-height: 1.7; color: #e8ecf3; white-space: pre-wrap">{{fm.preview}}</pre>
 <sc-if value="{{fm.useEndpoint}}" hint-placeholder-val="{{ true }}">
 <button type="button" onClick="{{fm.send}}" disabled="{{fm.sending}}" style="width: 100%; font: inherit; font-size: 17px; font-weight: 800; color: #0b0f17; background: #5be3b0; border: 0; border-radius: 12px; padding: 16px; min-height: 54px; cursor: pointer">{{fm.sendLabel}}</button>
 <sc-if value="{{fm.hasSendErr}}" hint-placeholder-val="{{ false }}">
