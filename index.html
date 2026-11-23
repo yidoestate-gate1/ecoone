@@ -1411,7 +1411,7 @@ out.hero.labels = [
 { num: '04', text: 'CCTV 통합관제', l: 43.6, t: 3, w: 21.8, h: 4.9 },
 { num: '05', text: '사업주 모바일 확인', l: 0.9, t: 26, w: 23.6, h: 5.2 }
 ].map((x, i) => {
-  const t = Math.max(0.6, x.t - 1.9), h = x.h + 2, mw = x.w + 3.5;
+  const t = Math.max(0.6, x.t - 0.9), h = x.h + 0.3, mw = x.w + 3.5;
   let pos;
   if (x.l < 5) pos = 'left: 0.8%';
   else if (x.l + x.w > 90) pos = 'right: 0.8%';
