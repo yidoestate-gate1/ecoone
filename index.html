@@ -1295,7 +1295,7 @@ out.formOpen = st.form !== null;
 out.formEdit = st.form === 'edit';
 out.formReview = st.form === 'review';
 out.formDone = st.form === 'done';
-out.openForm = () => this.setState({ form: 'edit', err: '' });
+out.openForm = () => this.setState(s0 => ({ form: 'edit', err: '', formAt: s0.formAt && s0.form ? s0.formAt : Date.now() }));
 out.closeForm = () => this.setState({ form: null });
 out.fm = {
 company: F.company, name: F.name, phone: F.phone, email: F.email, msg: F.msg, agree: F.agree,
@@ -1326,7 +1326,7 @@ siteVal: F.site, featsVal: F.feats.join(', '),
 send: () => {
 if (this.state.sending) return;
 const f = this.state.fm;
-const body = new URLSearchParams({ company: f.company, name: f.name, phone: f.phone, email: f.email, site: f.site, feats: f.feats.join(', '), msg: (f.msg || '').slice(0, 2000) });
+const body = new URLSearchParams({ company: f.company, name: f.name, phone: f.phone, email: f.email, site: f.site, feats: f.feats.join(', '), msg: (f.msg || '').slice(0, 2000), t: String(Date.now() - (this.state.formAt || 0)) });
 this.setState({ sending: true, sendErr: false });
 const done = () => this.setState({ sending: false, form: 'done' });
 const fail = () => this.setState({ sending: false, sendErr: true });
@@ -1339,7 +1339,7 @@ fetch(EP, { method: 'POST', mode: 'no-cors', credentials: 'omit', body: body, si
 } catch (e) { fail(); }
 },
 sending: !!st.sending, sendLabel: st.sending ? '접수 중…' : '접수하기', hasSendErr: !!st.sendErr,
-submitUrl: hasEP ? EP + '?' + [['company', F.company], ['name', F.name], ['phone', F.phone], ['email', F.email], ['site', F.site], ['feats', F.feats.join(', ')], ['msg', (F.msg || '').slice(0, 600)]].map(kv => kv[0] + '=' + encodeURIComponent(kv[1] || '')).join('&') : '',
+submitUrl: hasEP ? EP + '?' + [['company', F.company], ['name', F.name], ['phone', F.phone], ['email', F.email], ['site', F.site], ['feats', F.feats.join(', ')], ['msg', (F.msg || '').slice(0, 600)], ['t', String(Date.now() - (st.formAt || 0))]].map(kv => kv[0] + '=' + encodeURIComponent(kv[1] || '')).join('&') : '',
 doneTitle: hasEP ? '접수되었습니다' : '메일 창이 열렸습니다',
 doneMsg: hasEP ? '담당자가 확인 후 연락드리겠습니다. 이메일을 남기셨다면 접수 확인 메일이 발송됩니다.' : '열린 메일에서 보내기를 누르면 접수가 끝납니다.',
 mailto: 'mailto:' + TO + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body),
